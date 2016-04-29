@@ -1670,13 +1670,20 @@ _lp_set_prompt()
         source "$LP_PS1_FILE"
     fi
 
+    if [[ -z "$AWS_PROFILE" ]]; then
+        LP_AWS=""
+    else
+        LP_AWS=" ${LP_COLORMAP_2}${AWS_PROFILE}${NO_COL}"
+    fi
+
+
     if [[ -z "$LP_PS1" ]] ; then
         # add title escape time, jobs, load and battery
         PS1="${LP_PS1_PREFIX}${LP_TIME}${LP_BATT}${LP_LOAD}${LP_TEMP}${LP_JOBS}"
         # add user, host and permissions colon
         PS1="${PS1}${LP_BRACKET_OPEN}${LP_USER}${LP_HOST}${LP_PERM}"
 
-        PS1="${PS1}${LP_PWD}${LP_BRACKET_CLOSE}${LP_SCLS}${LP_VENV}${LP_PROXY}"
+        PS1="${PS1}${LP_PWD}${LP_BRACKET_CLOSE}${LP_AWS}${LP_SCLS}${LP_VENV}${LP_PROXY}"
 
         # Add VCS infos
         # If root, the info has not been collected unless LP_ENABLE_VCS_ROOT

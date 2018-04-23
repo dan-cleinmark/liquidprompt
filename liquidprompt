@@ -1841,7 +1841,7 @@ _lp_set_prompt()
     if [[ -z "$AWS_PROFILE" ]]; then
         LP_AWS=""
     else
-        LP_AWS=" ${LP_COLORMAP_2}${AWS_PROFILE}${NO_COL}"
+        LP_AWS=" ${LP_COLOR_SU}${AWS_PROFILE}${NO_COL}"
     fi
 
 

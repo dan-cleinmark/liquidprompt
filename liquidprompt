@@ -1838,10 +1838,20 @@ _lp_set_prompt()
         source "$LP_PS1_FILE"
     fi
 
-    if [[ -z "$AWS_PROFILE" ]]; then
-        LP_AWS=""
-    else
+    if [[ "$AWS_PROFILE" ]]; then
         LP_AWS=" ${LP_COLOR_SU}${AWS_PROFILE}${NO_COL}"
+    elif [[ "$AWS_ACCOUNT" ]]; then
+        ACCT_COLOR="${LP_COLOR_SU}"
+        if [[ "$AWS_ACCOUNT" =~ "prd" ]]; then
+            ACCT_COLOR="${LP_COLOR_MARK_ROOT}"
+        fi
+        ROLE_COLOR="${LP_COLOR_SU}"
+        if [[ "$AWS_ROLE" =~ "Admin" ]]; then
+            ROLE_COLOR="${LP_COLOR_MARK_ROOT}"
+        fi
+        LP_AWS=" ${ACCT_COLOR}${AWS_ACCOUNT}/${ROLE_COLOR}${AWS_ROLE}${NO_COL}"
+    else
+        LP_AWS=""
     fi
 
 
